@@ -1,12 +1,8 @@
-require 'faraday'
-require 'faraday_middleware'
-require 'json'
-require 'csv'
-require 'uri'
-require 'google_drive'
-require 'digest/sha1'
 require 'dotenv/load'
-require 'tempfile'
+require 'bundler/setup'
+
+Bundler.require
+
 require_relative 'brawl_data_fetcher'
 require_relative 'data_formatter'
 require_relative 'google_sheet_manager'
@@ -20,6 +16,7 @@ def execute
 
   spreadsheet.worksheets.each do |worksheet|
     players = worksheet.rows[0].take(3).reject(&:empty?)
+
     next unless players.size >= 2
 
     filtered_items = fetcher.request(players.first).select do |item|

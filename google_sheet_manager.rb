@@ -1,6 +1,6 @@
 class GoogleSheetManager
   CREDENTIALS = ENV['GOOGLE_API_CREDENTIALS']
-  SPREADSHEET_TITLE = 'teste brawl'
+  SPREADSHEET_TITLE = ENV['SPREADSHEET_TITLE']
 
   def write_csv(items, worksheet)
     items.each do |item|
