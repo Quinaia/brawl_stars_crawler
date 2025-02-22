@@ -29,7 +29,12 @@ def execute
   end
 end
 
-loop do
+if ENV['CRON_JOB'].to_i == 0
+  loop do
+    execute
+
+    sleep(TIMESPAN)
+  end
+else
   execute
-  sleep(TIMESPAN)
 end
