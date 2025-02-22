@@ -2,10 +2,12 @@ class DataFormatter
   def self.format_response(items, base_player)
     items.map do |item|
       teams = item.dig('battle', 'teams')
+
       teams.each do |team|
         key = team.any? { |p| p['tag'] == base_player } ? 'ally_team' : 'enemy_team'
         item['battle'][key] = team
       end
+
       item['battle'].delete('teams')
       item
     end
@@ -23,6 +25,7 @@ class DataFormatter
 
   def self.current_row(item)
     battle = item['battle']
+
     [
       battle_id(item),
       item['battleTime'],
