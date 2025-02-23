@@ -18,8 +18,6 @@ class GoogleSheetManager
 
   private
 
-  attr_reader :session
-
   def session
     @session ||= Tempfile.create(['client_secret', '.json']) do |temp_file|
       temp_file.write(CREDENTIALS)

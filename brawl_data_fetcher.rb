@@ -13,7 +13,7 @@ class BrawlDataFetcher
   private
 
   def conn
-    @conn = Faraday.new(url: BASE_URL) do |f|
+    @conn ||= Faraday.new(url: BASE_URL) do |f|
       f.request :json
       f.response :json
       f.adapter Faraday.default_adapter
