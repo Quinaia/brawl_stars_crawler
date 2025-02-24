@@ -30,6 +30,7 @@ class DataFormatter
       battle_id(item),
       item['battleTime'],
       battle['mode'],
+      battle['type'],
       item.dig('event', 'map'),
       battle['result'],
       format_team(battle['ally_team']),
