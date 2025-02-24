@@ -7,10 +7,16 @@ class BrawlDataFetcher
       req.headers['Authorization'] = "Bearer #{API_TOKEN}"
     end
 
-    response.success? ? response.body['items'] : []
+    response.success? ? format_response(response) : []
   end
 
   private
+
+  def format_response(response)
+    response.body['items'].select do |item|
+      item.dig('battle', 'type') != 'ranked'
+    end
+  end
 
   def conn
     @conn ||= Faraday.new(url: BASE_URL) do |f|

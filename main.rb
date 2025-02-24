@@ -20,6 +20,8 @@ def execute
     next unless players.size >= 2
 
     filtered_items = fetcher.request(players.first).select do |item|
+      next if item['battle'].key?('players')
+
       item.dig('battle', 'teams').any? do |team|
         players.all? { |p| team.any? { |player| player['tag'] == p } }
       end
